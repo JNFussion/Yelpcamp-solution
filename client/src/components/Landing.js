@@ -9,7 +9,7 @@ import logo from "../Assets/Logo.svg";
 
 function Landing() {
   return (
-    <article className=" text-gray-800">
+    <article className="text-gray-800">
       <div className="flex flex-col gap-4 xl:gap-0 xl:flex-row">
         <div className="h-screen flex-1">
           <div className="max-w-3xl mx-auto">
