@@ -1,10 +1,35 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import Logo from "../Assets/Logo.svg";
 import UserTestimonial from "../Assets/User Testimonial.svg";
 
 function SignInSignUp() {
   const { pathname } = useLocation();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    fetch(pathname, {
+      method: "POST", // or 'PUT'
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) =>
+        res.json().then((data) => {
+          localStorage.setItem("token", data);
+          navigate("/");
+        })
+      )
+      .catch((error) => console.alert("Error:", error));
+  }
 
   return (
     <article className=" text-gray-800">
@@ -27,7 +52,11 @@ function SignInSignUp() {
               <h2 className="font-bold xl:text-5xl md:text-4xl text-3xl">
                 Start exploring camps from all around the world.
               </h2>
-              <form action="" method="POST" className="grid gap-5 my-5">
+              <form
+                action=""
+                className="grid gap-5 my-5"
+                onSubmit={handleSubmit}
+              >
                 <div>
                   <label htmlFor="username">
                     <div className="py-4 text-gray-800">Username</div>
@@ -37,6 +66,7 @@ function SignInSignUp() {
                       id="username"
                       placeholder="jonhndoe_91"
                       className="w-full p-4 bg-slate-100"
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </label>
                 </div>
@@ -49,6 +79,7 @@ function SignInSignUp() {
                       id="password"
                       placeholder="Choose password"
                       className="w-full p-4 bg-slate-100"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </label>
                 </div>
