@@ -38,7 +38,7 @@ function Campgrounds() {
             />
           </form>
           <div>
-            <Link to="/campground/new" className="undeline text-gray-800">
+            <Link to="/campground/new" className="underline text-gray-800">
               Or add your own campground
             </Link>
           </div>
