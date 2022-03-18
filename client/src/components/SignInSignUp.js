@@ -22,13 +22,18 @@ function SignInSignUp() {
         "Content-Type": "application/json",
       },
     })
-      .then((res) =>
+      .then((res) => {
+        if (res.status === 401) {
+          res.json().then((data) => {
+            alert(data.message);
+          });
+        }
         res.json().then((data) => {
           localStorage.setItem("token", data);
           navigate("/");
-        })
-      )
-      .catch((error) => console.alert("Error:", error));
+        });
+      })
+      .catch((error) => console.error("Error:", error));
   }
 
   return (

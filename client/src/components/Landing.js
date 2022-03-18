@@ -50,7 +50,7 @@ function Landing() {
               </header>
               <div className="py-10">
                 <Link
-                  to="/"
+                  to="/campgrounds"
                   className="p-4 text-white font-bold bg-black rounded"
                 >
                   View Campgrounds
