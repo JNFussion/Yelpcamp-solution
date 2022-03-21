@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Assets/Logo.svg";
 import MovileMenu from "./MovileMenu";
 
-function Navbar(params) {
-  const [currentUser, setCurrentUser] = useState(localStorage.getItem("token"));
+function Navbar() {
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("jwt"))
+  );
 
   return (
     <nav className="max-w-7xl mx-auto my-10 px-4 flex justify-between">
@@ -20,8 +22,8 @@ function Navbar(params) {
       </div>
 
       {currentUser ? (
-        <div className="hidden md:block">
-          <p>{currentUser.username}</p>
+        <div className="hidden md:flex items-center gap-4">
+          <p className="text-gray-800">{currentUser.username}</p>
           <button type="button">Logout</button>
         </div>
       ) : (

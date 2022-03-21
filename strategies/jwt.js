@@ -1,3 +1,4 @@
+const User = require("../models/user");
 const jwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const bcrypt = require("bcryptjs");
@@ -8,6 +9,7 @@ opts.secretOrKey = process.env.SESSION_SECRET;
 
 module.exports = new jwtStrategy(opts, (jwt_payload, done) => {
   User.findOne({ username: jwt_payload.username }, (err, user) => {
+    console.log(user);
     if (err) {
       return done(err);
     }

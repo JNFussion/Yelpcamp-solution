@@ -29,7 +29,7 @@ function SignInSignUp() {
           });
         }
         res.json().then((data) => {
-          localStorage.setItem("token", data);
+          localStorage.setItem("jwt", JSON.stringify(data));
           navigate("/");
         });
       })

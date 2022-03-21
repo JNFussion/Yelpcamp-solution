@@ -44,7 +44,6 @@ exports.new_user_post = [
 
 exports.new_session_post = (req, res, next) => {
   const { username, password } = req.body;
-
   User.findOne({ username: username }, (err, user) => {
     if (err) {
       return next(err);
@@ -55,9 +54,9 @@ exports.new_session_post = (req, res, next) => {
     bcryptjs.compare(password, user.password, (err, result) => {
       if (result) {
         const opts = {};
-        opts.expiresIn = 120;
+        opts.expiresIn = 43200;
         const secret = process.env.SESSION_SECRET;
-        const token = jwt.sign({ username }, secret, opts);
+        const token = jwt.sign({ username, password }, secret, opts);
         return res.status(200).json({
           message: "Auth Passed",
           token,
