@@ -3,6 +3,28 @@ const { body, validationResult } = require("express-validator");
 var passport = require("passport");
 const Comment = require("../models/comment");
 
+exports.index = (req, res, next) => {
+  if (req.query.term) {
+    Campground.find({ name: req.query.term }).exec((err, result) => {
+      if (err) {
+        return next(err);
+      }
+      console.log(result);
+      if (result === null) {
+        res.send({ url: "/campgrounds" });
+      }
+      res.send({ url: result[0].url });
+    });
+  } else {
+    Campground.find().exec((err, camps) => {
+      if (err) {
+        return next(err);
+      }
+      res.send(camps);
+    });
+  }
+};
+
 exports.show = (req, res, next) => {
   Campground.findById(req.params.id)
     .populate("comments")

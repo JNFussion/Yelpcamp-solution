@@ -18,7 +18,6 @@ function CampgroundShow() {
   }, []);
 
   if (camp) {
-    console.log(camp.comments);
     return (
       <>
         <Navbar />
@@ -49,19 +48,20 @@ function CampgroundShow() {
           <section className="max-w-7xl mx-auto my-10 px-4">
             <div className="py-10 border rounded shadow">
               <div className="max-w-3xl mx-auto">
-                {camp.comments.map((c) => (
-                  <article className="border-b-[1px] ">
-                    <header className="my-4 flex justify-between">
-                      <h3 className="font-bold text-lg">{c.author}</h3>
-                      <div>
-                        {formatDistanceToNow(parseISO(c.create_at), {
-                          addSuffix: true,
-                        })}
-                      </div>
-                    </header>
-                    <p className="py-4 text-gray-700">{c.description}</p>
-                  </article>
-                ))}
+                {camp.comments &&
+                  camp.comments.map((c) => (
+                    <article className="border-b-[1px] ">
+                      <header className="my-4 flex justify-between">
+                        <h3 className="font-bold text-lg">{c.author}</h3>
+                        <div>
+                          {formatDistanceToNow(parseISO(c.create_at), {
+                            addSuffix: true,
+                          })}
+                        </div>
+                      </header>
+                      <p className="py-4 text-gray-700">{c.description}</p>
+                    </article>
+                  ))}
               </div>
               <div>
                 <Link
