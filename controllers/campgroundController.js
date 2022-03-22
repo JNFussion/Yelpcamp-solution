@@ -1,8 +1,18 @@
 var Campground = require("../models/campground");
 const { body, validationResult } = require("express-validator");
 var passport = require("passport");
+const Comment = require("../models/comment");
 
-exports.show = (req, res, next) => {};
+exports.show = (req, res, next) => {
+  Campground.findById(req.params.id)
+    .populate("comments")
+    .exec((err, camp) => {
+      if (err) {
+        return next(err);
+      }
+      res.send(camp);
+    });
+};
 
 exports.new_camp_post = [
   passport.authenticate("jwt", { session: false }),
@@ -27,6 +37,7 @@ exports.new_camp_post = [
     .isLength({ min: 1 })
     .escape()
     .withMessage("Campground must have a description"),
+  body("author").trim().escape(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -37,12 +48,54 @@ exports.new_camp_post = [
         price: req.body.price,
         image: req.body.image,
         description: req.body.description,
+        author: req.body.author,
       });
       campground.save((err) => {
         if (err) {
           return next(err);
         }
         res.send({ url: campground.url });
+      });
+    }
+  },
+];
+
+exports.new_comment_post = [
+  passport.authenticate("jwt", { session: false }),
+  body("description")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Campground must have a description"),
+  body("author").trim().escape(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.send(errors);
+    } else {
+      Campground.findById(req.params.id).exec((err, camp) => {
+        if (err) {
+          return next(err);
+        }
+        const comment = new Comment({
+          description: req.body.description,
+          author: req.body.author,
+          create_at: new Date(),
+          campground: camp._id,
+        });
+        comment.save((err) => {
+          if (err) {
+            return next(err);
+          }
+          camp.comments = [...camp.comments, comment._id];
+
+          camp.save((err) => {
+            if (err) {
+              return next(err);
+            }
+            res.send({ url: camp.url });
+          });
+        });
       });
     }
   },

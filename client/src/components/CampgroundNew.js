@@ -35,6 +35,7 @@ function CampgroundNew() {
         price,
         image,
         description,
+        author: e.target.author.value,
       }),
     }).then((response) => {
       if (response.status === 401) {
@@ -55,6 +56,7 @@ function CampgroundNew() {
               return err;
             });
             setErrors(err);
+            // It set the value from the previous submitted form
             if (err.name) {
               setName(err.name.value);
             }
@@ -85,6 +87,7 @@ function CampgroundNew() {
           className="m-4 grid gap-4"
           onSubmit={handleSubmit}
         >
+          <input type="hidden" name="author" value={jwt ? jwt.username : ""} />
           <div>
             <label htmlFor="name">
               <div className="my-4 text-gray-800">Campground Name</div>
