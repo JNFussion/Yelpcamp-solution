@@ -9,10 +9,6 @@ var LocalStrategy = require("passport-local").Strategy;
 var session = require("express-session");
 var jwtStrategy = require("./strategies/jwt");
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
 mongoose.connect(process.env.MONGODB, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -25,6 +21,10 @@ var usersRouter = require("./routes/users");
 var campgroundRouter = require("./routes/campground");
 
 var app = express();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 app.use(
   session({
