@@ -2,8 +2,7 @@
 
 This project is my implementation the challenge Yelpcamp from [Codewell](https://codewell.cc). Codewell provide you with real-world design templates that you can use to practice your HTML and CSS projects.
 
-Live demo [here](https://obscure-shore-42840.herokuapp.com/). <br>
-Submitted solution [here]().
+Live demo [here](https://obscure-shore-42840.herokuapp.com/).
 
 ## Features
 
