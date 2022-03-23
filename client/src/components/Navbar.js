@@ -24,7 +24,15 @@ function Navbar() {
       {currentUser ? (
         <div className="hidden md:flex items-center gap-4">
           <p className="text-gray-800">{currentUser.username}</p>
-          <button type="button">Logout</button>
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.clear();
+              setCurrentUser();
+            }}
+          >
+            Logout
+          </button>
         </div>
       ) : (
         <>
