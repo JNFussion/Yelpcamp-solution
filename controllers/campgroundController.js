@@ -9,9 +9,9 @@ exports.index = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log(result);
-      if (result === null) {
-        res.send({ url: "/campgrounds" });
+      console.log(result.length);
+      if (result.length === 0) {
+        return res.send({ error: "Not found" });
       }
       res.send({ url: result[0].url });
     });

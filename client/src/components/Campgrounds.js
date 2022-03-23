@@ -6,6 +6,7 @@ import searchIcon from "../Assets/Search Icon.svg";
 
 function Campgrounds() {
   const [camps, setCamps] = useState([]);
+  const [error, setError] = useState("");
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,9 +19,17 @@ function Campgrounds() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`${pathname}?term=${e.target.term.value}`).then((response) =>
-      response.json().then((data) => navigate(data.url))
-    );
+    fetch(`${pathname}?term=${e.target.term.value}`).then((response) => {
+      response.json().then((data) => {
+        if (data.error) {
+          e.target.term.value = "";
+          setError(data.error);
+        }
+        if (data.url) {
+          navigate(data.url);
+        }
+      });
+    });
   }
 
   return (
@@ -61,6 +70,7 @@ function Campgrounds() {
               className="flex-auto p-4 rounded font-bold text-white bg-black"
             />
           </form>
+          <p className="text-xs text-red-700">{error}</p>
           <div>
             <Link to="/campground/new" className="underline text-gray-800">
               Or add your own campground
