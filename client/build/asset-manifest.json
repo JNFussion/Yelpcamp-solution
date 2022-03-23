@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7af5fd62.css",
+    "main.js": "/static/js/main.ca2c9d0c.js",
+    "static/media/Map.png": "/static/media/Map.97047be1897c5b8502a8.png",
+    "static/media/Hero Image.jpg": "/static/media/Hero Image.38b8b3fabac0227de377.jpg",
+    "static/media/User Testimonial.svg": "/static/media/User Testimonial.c9e4d5e582b324a74dc59142b0a7dc18.svg",
+    "static/media/Plum Guide.svg": "/static/media/Plum Guide.d66d3818edbea987a53281009775af02.svg",
+    "static/media/Booking.svg": "/static/media/Booking.e1646697164266eaaa49a8759109dae2.svg",
+    "static/media/Airbnb.svg": "/static/media/Airbnb.2a4553a34ca91aa467bc3f95fdf81e77.svg",
+    "static/media/Logo.svg": "/static/media/Logo.a6cc6b83b409af85c7e13827eaca8ea0.svg",
+    "static/media/Chat Bubble.svg": "/static/media/Chat Bubble.39aa8a9b79e6f3944dbaaadda482811b.svg",
+    "index.html": "/index.html",
+    "static/media/Search Icon.svg": "/static/media/Search Icon.1c005bdda281922969eb247c6f18c177.svg",
+    "static/media/Checkmark.svg": "/static/media/Checkmark.fe52f1e33a5ed6f1a2e8613f569a3434.svg",
+    "static/media/Hamburger Menu.svg": "/static/media/Hamburger Menu.e01f1151b99b8b7098dbbb95b4286fdb.svg",
+    "main.7af5fd62.css.map": "/static/css/main.7af5fd62.css.map",
+    "main.ca2c9d0c.js.map": "/static/js/main.ca2c9d0c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7af5fd62.css",
+    "static/js/main.ca2c9d0c.js"
+  ]
+}
